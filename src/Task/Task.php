@@ -4,17 +4,11 @@ namespace DBCompare\Task;
 
 class Task
 {
-    private array $steps = [];
-
-    public function __construct()
+    public static function run(): void
     {
         $queuStep = new QueuStep();
-        $this->steps = $queuStep->getSteps();
-    }
-
-    public function run(): void
-    {
-        if (empty($this->steps)) {
+        $steps = $queuStep->getSteps();
+        if (empty($steps)) {
             echo "No steps to execute." . PHP_EOL;
             return;
         }
@@ -24,8 +18,8 @@ class Task
         * @var \DBCompare\Task\Steps\StepInterface $step
         */
         $cont = 1;
-        $totalSteps = count($this->steps);
-        foreach ($this->steps as $step) {
+        $totalSteps = count($steps);
+        foreach ($steps as $step) {
             echo "Executing step: " . $cont . " of " . $totalSteps . " - " . $step->getName() . PHP_EOL;
             echo $step->getDescription() . PHP_EOL;
             $step->execute();

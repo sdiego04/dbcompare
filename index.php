@@ -13,22 +13,22 @@ foreach ($requiredExtensions as $ext) {
     }
 }
 if (!empty($missingExtensions)) {
-    echo "Missing required PHP extensions: " . implode(', ', $missingExtensions) . PHP_EOL;
+    echo "\033[41mMissing required PHP extensions: " . implode(', ', $missingExtensions) . PHP_EOL . "\033[0m";
     exit(1);
 }
 echo "All required PHP extensions are loaded." . PHP_EOL;
 echo "---------------------------------" . PHP_EOL;
 echo "Checking PHP version..." . PHP_EOL;
 if (version_compare(PHP_VERSION, '8.0.0', '<')) {
-    echo "PHP 8.0.0 or higher is required. Current version: " . PHP_VERSION . PHP_EOL;
+    echo "\033[41mPHP 8.0.0 or higher is required. Current version: " . PHP_VERSION . PHP_EOL . "\033[0m";
     exit(1);
 }
 echo "PHP version is sufficient: " . PHP_VERSION . PHP_EOL;
 echo "---------------------------------" . PHP_EOL;
 
-
 use DBCompare\Infrastructure\Output\Renderer;
 use DBCompare\Infrastructure\Output\Terminal\OutPutTerminal;
 
-(new DBCompare\Task\Task())->run();
+DBCompare\Task\Task::run();
 (new OutPutTerminal())->print();
+echo PHP_EOL . "\033[42mDB Compare completed. " . PHP_EOL . "\033[0m";
