@@ -1,0 +1,26 @@
+{
+    "name": "diegosilva/dbcompare",
+    "description": "Pacote para comparar dois bancos de dados",
+    "keywords": ["compare database schemas","compare databases","database diff","database schema diff"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Diego Silva",
+            "email": "s.diego04@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "scripts": {
+        "run-dbcompare": "php index.php"
+    },
+    "autoload": {
+        "psr-4": {
+            "DBCompare\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

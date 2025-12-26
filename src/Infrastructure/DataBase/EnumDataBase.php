@@ -1,0 +1,19 @@
+<?php
+
+namespace DBCompare\Infrastructure\DataBase;
+
+enum EnumDataBase
+{
+    case DB_COMPARE_DB_NAME;
+    case DB_COMPARE_DB_NAME_SECONDARY;
+    case DB_COMPARE_DB_DRIVER;
+    case DB_COMPARE_DB_DRIVER_SECONDARY;
+    case DB_COMPARE_DB_HOST;
+    case DB_COMPARE_DB_HOST_SECONDARY;
+    case DB_COMPARE_DB_PORT;
+    case DB_COMPARE_DB_PORT_SECONDARY;
+    case DB_COMPARE_DB_USER;
+    case DB_COMPARE_DB_USER_SECONDARY;
+    case DB_COMPARE_DB_PASSWORD;
+    case DB_COMPARE_DB_PASSWORD_SECONDARY;
+}
