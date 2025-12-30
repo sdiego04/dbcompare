@@ -4,7 +4,7 @@ namespace DBCompare\Task;
 
 use DBCompare\Task\Steps\StepInterface;
 
-class QueuStep
+class QueueStep
 {
     // List of step class names to be executed in order
     private array $steps = [
@@ -27,6 +27,8 @@ class QueuStep
         foreach ($this->steps as $stepClass) {
             if (class_exists($stepClass)) {
                 $instances[] = new $stepClass();
+            }else{
+                throw new \Exception("Step class {$stepClass} does not exist.");
             }
         }
         return $instances;

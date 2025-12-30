@@ -6,8 +6,8 @@ class Task
 {
     public static function run(): void
     {
-        $queuStep = new QueuStep();
-        $steps = $queuStep->getSteps();
+        $QueueStep = new QueueStep();
+        $steps = $QueueStep->getSteps();
         if (empty($steps)) {
             echo "No steps to execute." . PHP_EOL;
             return;

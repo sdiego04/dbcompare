@@ -26,9 +26,17 @@ if (version_compare(PHP_VERSION, '8.0.0', '<')) {
 echo "PHP version is sufficient: " . PHP_VERSION . PHP_EOL;
 echo "---------------------------------" . PHP_EOL;
 
-use DBCompare\Infrastructure\Output\Renderer;
 use DBCompare\Infrastructure\Output\Terminal\OutPutTerminal;
 
-DBCompare\Task\Task::run();
-(new OutPutTerminal())->print();
-echo PHP_EOL . "\033[42mDB Compare completed. " . PHP_EOL . "\033[0m";
+try {
+    
+    /** Run the DB Compare Task */
+    DBCompare\Task\Task::run();
+
+    /** Output the results to terminal */
+    (new OutPutTerminal())->print();
+    echo PHP_EOL . "\033[42mDB Compare completed. " . PHP_EOL . "\033[0m";
+} catch (Exception $e) {
+    echo "\033[41mError: " . $e->getMessage() . PHP_EOL . "\033[0m";
+    exit(1);
+}

@@ -2,38 +2,49 @@
 
 namespace DBCompare\Task\Steps;
 
-use DBCompare\Infrastructure\DataBase\ConnectDataBase;
-use DBCompare\Infrastructure\Driver\EnumDriver;
 use DBCompare\Infrastructure\Repository\MySql\MySqlRepository;
 use DBCompare\Service\CompareColumns;
 use DBCompare\Service\CompareTables;
-use DBCompare\Service\CreateJsonFile;
-use DBCompare\Service\FindDriverByName;
-use DBCompare\Service\GetJsonFile;
+use DBCompare\Service\LoadDriverByName;
+use DBCompare\Service\OutPutJsonFile;
 use DBCompare\Service\StoreJsonFile;
 
 class CompareColumnStep implements StepInterface
 {
     use \DBCompare\Helpers\DataBaseHelper;
 
+    /**
+     * Returns the name of the step.
+     *
+     * @return string
+     */
     public function getName(): string
     {
         return 'Compare Database Columns';
     }
 
+    /**
+     * Returns the description of the step.
+     *
+     * @return string
+     */
     public function getDescription(): string
     {
         return 'Compares columns between two database tables and identifies differences.';
     }
 
+    /**
+     * Executes the column comparison step.
+     *
+     * @return void
+     * @throws \Exception if an error occurs during execution.
+     */
     public function execute(): void
     {
-        $driver = FindDriverByName::execute(EnumDriver::tryFrom(getenv('DB_COMPARE_DB_DRIVER')), $this->getFirstDataBaseDsn());
-        new ConnectDataBase($driver);
 
-        $driver2 = FindDriverByName::execute(EnumDriver::tryFrom(getenv('DB_COMPARE_DB_DRIVER_SECONDARY')), $this->getSecondDataBaseDsn());
-        new ConnectDataBase($driver2);
-
+        $driver = LoadDriverByName::execute(getenv('DB_COMPARE_DB_DRIVER'), $this->getFirstDataBaseDsn());
+        $driver2 = LoadDriverByName::execute(getenv('DB_COMPARE_DB_DRIVER_SECONDARY'), $this->getSecondDataBaseDsn());
+   
         $compareTablesService = new CompareTables(
             new MySqlRepository($driver),
             new MySqlRepository($driver2)
@@ -61,7 +72,7 @@ class CompareColumnStep implements StepInterface
         }
 
         $response['columns'] = $compareColumnsResponse ?? [];
-        $dataJson = GetJsonFile::execute();
+        $dataJson = OutPutJsonFile::execute();
         $dataJson['columns'] = $response['columns'];
         StoreJsonFile::execute($dataJson);
         echo "Columns successfully compared." . PHP_EOL;

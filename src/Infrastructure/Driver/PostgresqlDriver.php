@@ -2,7 +2,7 @@
 
 namespace DBCompare\Infrastructure\Driver;
 
-class PostgresqlDriver implements DataBaseDriverInterface
+class PostgresqlDriver extends DriverBase implements DataBaseDriverInterface
 {
     public static function getDriverName(): string
     {

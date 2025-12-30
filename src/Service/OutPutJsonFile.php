@@ -2,7 +2,7 @@
 
 namespace DBCompare\Service;
 
-class GetJsonFile
+class OutPutJsonFile
 {
     public static function execute(): array
     {

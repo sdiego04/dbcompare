@@ -11,7 +11,7 @@ class OutPutTerminal
     private array $columnWidths = [];
     public function print(): void
     {
-        $data = \DBCompare\Service\GetJsonFile::execute();
+        $data = \DBCompare\Service\OutPutJsonFile::execute();
         echo PHP_EOL . "======= Database Compare tables result =======" . PHP_EOL . PHP_EOL;
         $headers = ['Column', 'Table Database One :Homolog', 'Table Database Two: Production'];
         foreach ($data['tables']['only_in_db_one'] as $table) {
