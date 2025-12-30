@@ -13,7 +13,8 @@ trait DataBaseHelper
             database: getenv('DB_COMPARE_DB_NAME_SECONDARY'),
             username: getenv('DB_COMPARE_DB_USER_SECONDARY'),
             password: getenv('DB_COMPARE_DB_PASSWORD_SECONDARY'),
-            charset: 'utf8'
+            charset: 'utf8',
+            pathSSLCertificate: getenv('DB_COMPARE_DB_SSL_CERT_SECONDARY')
         );
     }
 
@@ -24,7 +25,8 @@ trait DataBaseHelper
             database: getenv('DB_COMPARE_DB_NAME'),
             username: getenv('DB_COMPARE_DB_USER'),
             password: getenv('DB_COMPARE_DB_PASSWORD'),
-            charset: 'utf8'
+            charset: 'utf8',
+            pathSSLCertificate: getenv('DB_COMPARE_DB_SSL_CERT')
         );
     }
 }

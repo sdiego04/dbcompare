@@ -2,8 +2,6 @@
 
 namespace DBCompare\Task\Steps;
 
-use DBCompare\Infrastructure\Driver\EnumDriver;
-use DBCompare\Service\FindDriverByName;
 use DBCompare\Service\LoadDriverByName;
 use LogicException;
 

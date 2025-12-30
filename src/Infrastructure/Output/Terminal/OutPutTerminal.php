@@ -13,7 +13,7 @@ class OutPutTerminal
     {
         $data = \DBCompare\Service\OutPutJsonFile::execute();
         echo PHP_EOL . "======= Database Compare tables result =======" . PHP_EOL . PHP_EOL;
-        $headers = ['Column', 'Table Database One :Homolog', 'Table Database Two: Production'];
+        $headers = ['Column', 'Table Database One :' . getenv('DB_COMPARE_DB_NAME_ALIAS'), 'Table Database Two: ' . getenv('DB_COMPARE_DB_NAME_ALIAS_SECONDARY')];
         foreach ($data['tables']['only_in_db_one'] as $table) {
              $rows[] = [$table, 'Exists', 'Does not exist'];
         }

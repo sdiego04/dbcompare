@@ -7,6 +7,26 @@ class DataBaseHelperTest extends TestCase
 {
     use \DBCompare\Helpers\DataBaseHelper;
 
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+    }
+
+    public function testInstanceOfDataBaseHelperTrait()
+    {
+        $this->assertTrue(in_array(\DBCompare\Helpers\DataBaseHelper::class, class_uses($this)));
+    }
+    
     public function testGetFirstDataBaseDsn()
     {
         $dto = $this->getFirstDataBaseDsn();

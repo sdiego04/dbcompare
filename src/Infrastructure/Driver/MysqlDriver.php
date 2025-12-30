@@ -13,14 +13,18 @@ class MysqlDriver extends DriverBase implements DataBaseDriverInterface
      */
     public function __construct(DataBaseDto $dto)
     {
+        if(!isset($dto->pathSSLCertificate) || empty($dto->pathSSLCertificate)){
+            throw new \Exception("Path to SSL Certificate is required for MySQL connection.");
+        }
+
         $this->options =  [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
-                PDO::MYSQL_ATTR_SSL_CA => '/Desktop/server.pem',
-            ];
+            PDO::ATTR_ERRMODE                      => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE           => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES             => false,
+            PDO::MYSQL_ATTR_INIT_COMMAND           => 'SET NAMES utf8',
+            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+            PDO::MYSQL_ATTR_SSL_CA                 => $dto->pathSSLCertificate,
+        ];
         
         parent::__construct($dto);
     }

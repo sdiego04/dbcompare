@@ -1,1 +1,1 @@
-{"version":2,"defects":[],"times":{"DataBaseHelperTest::testGetFirstDataBaseDsn":0.004,"DataBaseHelperTest::testGetSecondDataBaseDsn":0}}
+{"version":2,"defects":[],"times":{"DataBaseHelperTest::testGetFirstDataBaseDsn":0.004,"DataBaseHelperTest::testGetSecondDataBaseDsn":0,"DataBaseHelperTest::testInstanceOfDataBaseHelperTrait":0.006}}

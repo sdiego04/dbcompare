@@ -29,7 +29,10 @@ abstract class DriverBase
      *
      * @return \PDO|null
      */
-    public abstract function getConnection(): ?\PDO;
+    public function getConnection(): ?\PDO
+    {
+        return $this->connection;
+    }
 
     /**
      * Returns the name of the driver.
