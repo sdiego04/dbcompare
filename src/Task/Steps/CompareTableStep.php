@@ -2,9 +2,8 @@
 
 namespace DBCompare\Task\Steps;
 
-use DBCompare\Infrastructure\Repository\MySql\MySqlRepository;
 use DBCompare\Service\CompareTables;
-use DBCompare\Service\LoadDriverByName;
+use DBCompare\Service\DataBase\DataBaseHub;
 use DBCompare\Service\StoreJsonFile;
 
 class CompareTableStep implements StepInterface
@@ -38,14 +37,19 @@ class CompareTableStep implements StepInterface
      */
     public function execute(): void
     {
-        $driver = LoadDriverByName::execute(
-            getenv('DB_COMPARE_DB_DRIVER'), $this->getFirstDataBaseDsn());
-        $driver2 = LoadDriverByName::execute(
-            getenv('DB_COMPARE_DB_DRIVER_SECONDARY'), $this->getSecondDataBaseDsn());
+        $serviceDataBaseOne = DataBaseHub::create(
+            getenv('DB_COMPARE_DB_DRIVER'),
+            $this->getFirstDataBaseDsn()
+        )->getService();
+
+        $serviceDataBaseTwo = DataBaseHub::create(
+            getenv('DB_COMPARE_DB_DRIVER_SECONDARY'),
+            $this->getSecondDataBaseDsn()
+        )->getService();
 
         $compareTablesService = new CompareTables(
-            new MySqlRepository($driver),
-            new MySqlRepository($driver2)
+            $serviceDataBaseOne->getRepository(),
+            $serviceDataBaseTwo->getRepository()
         );
 
         $response = [];

@@ -22,30 +22,21 @@ abstract class DriverBase
      *
      * @throws \Exception if the connection fails.
      */
-    public function connect(): void
-    {
-        throw new \Exception('Not implemented');
-    }
+    public abstract function connect(): void;
 
     /**
      * Returns the PDO connection.
      *
      * @return \PDO|null
      */
-    public function getConnection(): ?\PDO
-    {
-        return $this->connection;
-    }
+    public abstract function getConnection(): ?\PDO;
 
     /**
      * Returns the name of the driver.
      *
      * @return string
      */    
-    public static function getDriverName(): string
-    {
-        throw new \Exception('Not implemented');
-    }
+    public abstract static function getDriverName(): string;
 
     /**
      * Sets additional options for the database connection.
