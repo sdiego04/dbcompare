@@ -9,6 +9,7 @@ class DataBaseHelperTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
+        echo "Setting up test DataBaseHelperTest" . PHP_EOL;
         parent::setUpBeforeClass();
     }
 
@@ -26,7 +27,7 @@ class DataBaseHelperTest extends TestCase
     {
         $this->assertTrue(in_array(\DBCompare\Helpers\DataBaseHelper::class, class_uses($this)));
     }
-    
+
     public function testGetFirstDataBaseDsn()
     {
         $dto = $this->getFirstDataBaseDsn();
